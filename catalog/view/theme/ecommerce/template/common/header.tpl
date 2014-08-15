@@ -21,6 +21,14 @@
 <link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>" media="<?php echo $style['media']; ?>" />
 <?php } ?>
 <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.7.1.min.js"></script>
+<!-- Start June edit -->
+<script type="text/javascript" src="catalog/view/javascript/jquery/bootstrap.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/ecommerce/stylesheet/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/ecommerce/stylesheet/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/ecommerce/stylesheet/bootstrap-theme.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/ecommerce/stylesheet/bootstrap-theme.min.css" />
+<!-- Finished June edit -->
 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
 <link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/ui/themes/ui-lightness/jquery-ui-1.8.16.custom.css" />
 <script type="text/javascript" src="catalog/view/javascript/common.js"></script>
