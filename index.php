@@ -2,15 +2,15 @@
 include 'simple_html_dom.php';
 
 // Create DOM from URL or file
-$html = file_get_html('http://www.google.com/');
+$html = file_get_html('http://www.vatgia.com/home/');
 
 // Find all images 
-foreach($html->find('img') as $element) 
-       echo $element->src . '<br>';
-
-// Find all links 
-foreach($html->find('a') as $element) 
-       echo $element->href . '<br>';
+// print("<pre>");
+foreach($html->find('ul#menu_root') as $element){
+	foreach ($element->find('li a') as $a) {
+		print($a->href) . "<br>";
+	}
+}
 
 exit;
 
