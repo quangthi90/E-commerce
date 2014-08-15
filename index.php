@@ -1,6 +1,9 @@
 <?php
 include 'simple_html_dom.php';
 
+// UTF8 for Vietnamese
+print '<meta content="text/html; charset=utf-8" http-equiv="Content-Type">';
+
 // Create DOM from URL or file
 $html = file_get_html('http://www.vatgia.com/home/');
 
@@ -8,7 +11,7 @@ $html = file_get_html('http://www.vatgia.com/home/');
 // print("<pre>");
 foreach($html->find('ul#menu_root') as $element){
 	foreach ($element->find('li a') as $a) {
-		print($a->href) . "<br>";
+		print($a) . "<br>";
 	}
 }
 
