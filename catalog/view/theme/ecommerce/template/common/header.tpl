@@ -94,10 +94,10 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
          <div class="plugin">
           <div style="text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 32px; height: 20px;" id="___plusone_0"><iframe width="100%" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 32px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" id="I0_1408159470805" name="I0_1408159470805" src="https://apis.google.com/u/0/se/0/_/+1/fastbutton?usegapi=1&amp;annotation=none&amp;size=medium&amp;origin=http%3A%2F%2Fvatgia.com&amp;url=http%3A%2F%2Fwww.vatgia.com%2F&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.en.RmV27G4cP4g.O%2Fm%3D__features__%2Fam%3DEQ%2Frt%3Dj%2Fd%3D1%2Ft%3Dzcms%2Frs%3DAItRSTNGQGK1RCUwKhcSa_cdAdZcwHiy5Q#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh&amp;id=I0_1408159470805&amp;parent=http%3A%2F%2Fvatgia.com&amp;pfname=&amp;rpctoken=95848700" data-gapiattached="true" title="+1"></iframe></div>
           <script type="text/javascript">
-          (function(){
-          var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/plusone.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-          })();
+          // (function(){
+          // var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/plusone.js';
+          // var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+          // })();
           </script>
            <iframe frameborder="0" allowtransparency="true" style="border:none; overflow:hidden; width:116px; height:20px; margin-left: 6px;" scrolling="no" src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2FVatgiaFanpage&amp;send=false&amp;layout=button_count&amp;width=113&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=20"></iframe>
           </div>
@@ -191,21 +191,11 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
       <div class="clear"></div>
     </div>
 
-<!--   <?php echo $language; ?>
-  <?php echo $currency; ?> -->
+  <?php echo "Ngon ngữ: ".$language; ?>
+  <!-- <?php echo $currency; ?> -->
   <?php //echo $cart; ?>
-  <!-- <div id="search">
-    <div class="button-search"></div>
-    <input type="text" name="search" placeholder="<?php echo $text_search; ?>" value="<?php echo $search; ?>" />
-  </div> -->
-  <!-- <div id="welcome">
-    <?php if (!$logged) { ?>
-    <?php echo $text_welcome; ?>
-    <?php } else { ?>
-    <?php echo $text_logged; ?>
-    <?php } ?>
-  </div> -->
-  <!-- <div class="links"><a href="<?php echo $home; ?>"><?php echo $text_home; ?></a><a href="<?php echo $wishlist; ?>" id="wishlist-total"><?php echo $text_wishlist; ?></a><a href="<?php echo $account; ?>"><?php echo $text_account; ?></a><a href="<?php echo $shopping_cart; ?>"><?php echo $text_shopping_cart; ?></a><a href="<?php echo $checkout; ?>"><?php echo $text_checkout; ?></a></div>
+
+  <!-- <div class="links"><a href="<?php echo $home; ?>"><?php echo $text_home; ?></a><a href="<?php echo $wishlist; ?>" id="wishlist-total"><?php echo $text_wishlist; ?></a><a href="<?php echo $account; ?>"><?php echo $text_account; ?></a><a href="<?php echo $shopping_cart; ?>"><?php echo $text_shopping_cart; ?></a><a href="<?php echo $checkout; ?>"><?php echo $text_checkout; ?></a></div> -->
 
   <?php if ($categories) { ?>
   <div id="menu">
@@ -236,5 +226,5 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
       <div class="warning"><?php echo $error ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
       
   <?php } ?>
-  <div id="notification"></div> -->
+  <div id="notification"></div>
 </div>
