@@ -28,8 +28,13 @@
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/ecommerce/stylesheet/bootstrap.min.css" />
 <!-- <link rel="stylesheet" type="text/css" href="catalog/view/theme/ecommerce/stylesheet/bootstrap-theme.css" /> -->
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/ecommerce/stylesheet/bootstrap-theme.min.css" />
+
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/ecommerce/stylesheet/home/html.css" />
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/ecommerce/stylesheet/home/css_main.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/ecommerce/stylesheet/home/forms.css" />
+
+
+
 
 <!-- Finished June edit -->
 <script type="text/javascript" src="catalog/view/javascript/jquery/ui/jquery-ui-1.8.16.custom.min.js"></script>
@@ -67,15 +72,15 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
     <a class="close" onclick="$('#banner_1190x90_header').slideUp(); $.cookie('banner_hidden[header_0]', 1, { path: '/' });" href="javascript:;" title="Đóng"></a>
     <div id="myadBan_14357" class="first " style="width:1190px;height:90px;display:inline-block;background: #e9e9e9;position: relative;font-size: 0;text-align: center;overflow:hidden;" onmouseout="" onmouseover="">
     <a href="http://ad.vatgia.com/a/b_click.php?data=eyJiYW5faWQiOiIxNDM1NyIsInBvc19pZCI6IjE0MyIsIndlYl9pZCI6MywiYmFuX2xpbmsiOiJodHRwOlwvXC9oZWxwLnZhdGdpYS5jb21cL2xhbmRpbmctcGFnZVwvbWllbl9waGlfdmFuX2NodXllblwvIiwiY2F0X2lkIjowfQ--" target="_blank" style="" title="">
-    <img src="http://media.myad.vn/photo/users_b_upload/2014/08/vuj1408011478.jpg" style="width : auto;">
+    <img src="catalog/view/theme/ecommerce/image/vuj1408011478.jpg" style="width : auto;">
     </a>
     </div>
   </div>
   <script type="text/javascript">
-    $(window).load(function(){
-    var headerBannerDomEle= $(document.getElementById("banner_1190x90_header"));
-    setTimeout(function(){ if(headerBannerDomEle.find("div").length) headerBannerDomEle.prepend('<a title="Đóng" class="close" href="javascript:;" onclick="$(\'#banner_1190x90_header\').slideUp(); $.cookie(\'banner_hidden[header_0]\', 1, { path: \'/\' });"></a>'); }, 0);
-    });
+    // $(window).load(function(){
+    // var headerBannerDomEle= $(document.getElementById("banner_1190x90_header"));
+    // setTimeout(function(){ if(headerBannerDomEle.find("div").length) headerBannerDomEle.prepend('<a title="Đóng" class="close" href="javascript:;" onclick="$(\'#banner_1190x90_header\').slideUp(); $.cookie(\'banner_hidden[header_0]\', 1, { path: \'/\' });"></a>'); }, 0);
+    // });
   </script>
 
 
@@ -101,7 +106,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
             </div>
           </div>
           <div class="fr">
-            <a js="loadSupportOnline()" addclass="header_bar_simple_tip" hidearrow="1" rel="nofollow" href="javascript:;" class="simple_tip icon help"><span class="glyphicon glyphicon-question-sign" style="color: #0000ee;"> </span> Hỗ trợ</a>
+            <a js="loadSupportOnline()" addclass="header_bar_simple_tip" hidearrow="1" rel="nofollow" href="javascript:;" class="simple_tip icon help">Hỗ trợ</a>
             <?php if (!$logged) { ?>
             <a addclass="header_bar_simple_tip header_bar_drop_link" hidearrow="1" rel="#header_register" target="_blank" href="https://id.vatgia.com/dang-ky/vatgia/?service=vatgia&amp;_cont=http://vatgia.com" class="simple_tip icon register">Đăng ký</a>
             <div class="hidden" id="header_register">
@@ -114,16 +119,16 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
             <?php } ?>
           <!-- <a oncleanup="simpleTipLoginOnCleanup()" onshow="simpleTipLoginOnShow()" addclass="header_bar_simple_tip" hidearrow="1" rel="#header_login" href="javascript:;" class="simple_tip icon user">Đăng nhập</a> -->
           <script type="text/javascript">
-            function simpleTipLoginOnShow(){
-            var domEle= $(document.getElementById("simple_tip_content"));
-            domEle.find("input[name='loginname']").focus().val(vatgiaConfig.login_config.default_loginname);
-            domEle.find("input[name='password']").val(vatgiaConfig.login_config.default_password);
-            }
-            function simpleTipLoginOnCleanup(){
-            var domEle= $(document.getElementById("simple_tip_content"));
-            vatgiaConfig.login_config.default_loginname= domEle.find("input[name='loginname']").val()
-            vatgiaConfig.login_config.default_password= domEle.find("input[name='password']").val()
-            }
+            // function simpleTipLoginOnShow(){
+            // var domEle= $(document.getElementById("simple_tip_content"));
+            // domEle.find("input[name='loginname']").focus().val(vatgiaConfig.login_config.default_loginname);
+            // domEle.find("input[name='password']").val(vatgiaConfig.login_config.default_password);
+            // }
+            // function simpleTipLoginOnCleanup(){
+            // var domEle= $(document.getElementById("simple_tip_content"));
+            // vatgiaConfig.login_config.default_loginname= domEle.find("input[name='loginname']").val()
+            // vatgiaConfig.login_config.default_password= domEle.find("input[name='password']").val()
+            // }
           </script>
           <div class="hidden" id="header_login">
             <form onsubmit="return checkForm(this.name, vatgiaConfig.login_config.array_check_form);" method="post" action="/home/act_login.php?redirect=L2hvbWUv" name="header_login" class="header_login">
@@ -148,7 +153,7 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
 
 
   <div class="header_content container_width">
-     <?php if ($logo) { ?>
+    <?php if ($logo) { ?>
     <div class="logo">
       <a href="<?php echo $home; ?>"><img src="http://static.vatgia.com/ccss/20140810/v4/logo.png"></a>
     </div>
@@ -162,16 +167,16 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
     </div>
     <div class="search">
       <script type="text/javascript">
-      var arrCtrlSearch= Array("0{#}{#}keyword{#}Từ khóa tìm kiếm");
-      $(function(){ setAutoComplete(); });
-      </script>
+      // var arrCtrlSearch= Array("0{#}{#}keyword{#}Từ khóa tìm kiếm");
+      // $(function(){ setAutoComplete(); });
+      // </script>
       <form onsubmit="return checkForm(this.name, arrCtrlSearch);" method="get" action="/home/quicksearch.php" name="header_search" id="header_search">
         <div class="border">
           <a rel="#header_search_option" href="javascript:;" class="simple_tip" id="header_search_text">Sản phẩm<b class="arrow_down"></b></a>
           <a onclick="changeLanguage($(this))" href="javascript:;" class="language_vn"></a>
           <input type="submit" value="Tìm kiếm" class="button">
           <div class="keyword">
-            <div><input type="text" autocomplete="off" maxlength="100" placeholder="Nhập từ khóa tìm kiếm..." value="" name="keyword" id="header_search_keyword" class="ac_input"></div>
+            <div><input type="text" autocomplete="off" maxlength="100" placeholder="<?php echo $text_search; ?>" value="<?php echo $search; ?>" name="keyword" id="header_search_keyword" class="ac_input"></div>
           </div>
           <div class="clear"></div>
         </div>
@@ -188,19 +193,19 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
 
 <!--   <?php echo $language; ?>
   <?php echo $currency; ?> -->
-  <?php echo $cart; ?>
-  <div id="search">
+  <?php //echo $cart; ?>
+  <!-- <div id="search">
     <div class="button-search"></div>
     <input type="text" name="search" placeholder="<?php echo $text_search; ?>" value="<?php echo $search; ?>" />
-  </div>
-  <div id="welcome">
+  </div> -->
+  <!-- <div id="welcome">
     <?php if (!$logged) { ?>
     <?php echo $text_welcome; ?>
     <?php } else { ?>
     <?php echo $text_logged; ?>
     <?php } ?>
-  </div>
-  <div class="links"><a href="<?php echo $home; ?>"><?php echo $text_home; ?></a><a href="<?php echo $wishlist; ?>" id="wishlist-total"><?php echo $text_wishlist; ?></a><a href="<?php echo $account; ?>"><?php echo $text_account; ?></a><a href="<?php echo $shopping_cart; ?>"><?php echo $text_shopping_cart; ?></a><a href="<?php echo $checkout; ?>"><?php echo $text_checkout; ?></a></div>
+  </div> -->
+  <!-- <div class="links"><a href="<?php echo $home; ?>"><?php echo $text_home; ?></a><a href="<?php echo $wishlist; ?>" id="wishlist-total"><?php echo $text_wishlist; ?></a><a href="<?php echo $account; ?>"><?php echo $text_account; ?></a><a href="<?php echo $shopping_cart; ?>"><?php echo $text_shopping_cart; ?></a><a href="<?php echo $checkout; ?>"><?php echo $text_checkout; ?></a></div>
 
   <?php if ($categories) { ?>
   <div id="menu">
@@ -231,5 +236,5 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
       <div class="warning"><?php echo $error ?><img src="catalog/view/theme/default/image/close.png" alt="" class="close" /></div>
       
   <?php } ?>
-  <div id="notification"></div>
+  <div id="notification"></div> -->
 </div>

@@ -217,7 +217,7 @@ table{
 	height: auto !important;
 }
 .banner_header .close{
-	background: url(beacon_sprite.png) no-repeat -6px -355px #FFF;
+	background: url("./../../image/beacon_sprite.png") no-repeat -6px -355px #FFF;
 	border-radius: 3px;
 	display: block;
 	opacity: .4;
@@ -349,7 +349,7 @@ select.form_control{
 	line-height: 0;
 }
 .header_bar .icon{
-	background-image: url(beacon_sprite.png);
+	background-image: url(./../../image/beacon_sprite.png);
 	background-repeat: no-repeat;
 	padding-left: 27px;
 }
