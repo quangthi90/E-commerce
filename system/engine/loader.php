@@ -50,6 +50,21 @@ final class Loader {
 		}
 	}
 
+	public function extract($extract) {
+		$file  = DIR_APPLICATION . 'extract/' . $extract . '.php';
+		$class = 'Extract' . preg_replace('/[^a-zA-Z0-9]/', '', $extract);
+
+		if (file_exists($file)) { 
+			include_once($file);
+
+			$this->registry->set('extract_' . str_replace('/', '_', $extract), new $class($this->registry));
+		} else {
+			trigger_error('Error: Could not load extract ' . $extract . '!');
+			exit();					
+		}
+	}
+
+
 	public function database($driver, $hostname, $username, $password, $database) {
 		$file  = DIR_SYSTEM . 'database/' . $driver . '.php';
 		$class = 'Database' . preg_replace('/[^a-zA-Z0-9]/', '', $driver);
