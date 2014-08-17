@@ -50,16 +50,16 @@ final class Loader {
 		}
 	}
 
-	public function model($model) {
-		$file  = DIR_APPLICATION . 'model/' . $model . '.php';
-		$class = 'Model' . preg_replace('/[^a-zA-Z0-9]/', '', $model);
+	public function extract($model) {
+		$file  = DIR_APPLICATION . 'extract/' . $model . '.php';
+		$class = 'Extract' . preg_replace('/[^a-zA-Z0-9]/', '', $model);
 
 		if (file_exists($file)) { 
 			include_once($file);
 
-			$this->registry->set('model_' . str_replace('/', '_', $model), new $class($this->registry));
+			$this->registry->set('extract' . str_replace('/', '_', $extract), new $class($this->registry));
 		} else {
-			trigger_error('Error: Could not load model ' . $model . '!');
+			trigger_error('Error: Could not load extract' . $extract . '!');
 			exit();					
 		}
 	}
