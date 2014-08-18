@@ -191,8 +191,8 @@ $registry->set('customer', new Customer($registry));
 
 // ---------------Edit Nga------------------------
 //Extracter
-$registry->set('extract_node', new simple_dom_html_node());
-$registry->set('extract_dom', new simple_dom_html());
+$registry->set('extract_node', new simple_html_dom_node(0));
+$registry->set('extract_dom', new simple_html_dom());
 //----------------End Edit------------------------
 
 // Affiliate

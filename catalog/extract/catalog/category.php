@@ -2,12 +2,33 @@
 	/**
 	* 
 	*/
-	class ExtractCatalogCategory extends Extract
+	class ExtractCatalogCategory 
 	{
-		public function getCategories($parent_id = 0) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '" . (int)$parent_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int)$this->config->get('config_store_id') . "'  AND c.status = '1' ORDER BY c.sort_order, LCASE(cd.name)");
-
-		return $query->rows;
-	}
+		public function getCategories() {
+			$html = file_get_html('http://www.vatgia.com/home/');
+			$category = array();
+			foreach($html->find('ul#menu_root') as $element){
+				foreach ($element->find('li') as $id) {
+					$category['category_id'] = $id->iddata;
+					$category['name'] = $id->first_child()->plaintext;
+					$category['href'] = $id->first_child()->href;
+				}
+			}
+			return $category;
+		}
+		public function getCategoriesChild($parent_id = 0){
+			$html = file_get_html('http://www.vatgia.com/home/');
+			$categorychild = array();
+			foreach($html->find('ul#menu_child_1') as $element){
+				foreach ($element->find('ul li') as $id) {
+					if ($id->parent()->iddata == $parent_id) {
+						$categorychild['category_id'] = $id->iddata;
+						$categorychild['name'] = $id->first_child()->plaintext;
+						$categorychild['href'] = $id->first_child()->href;
+					}
+				}
+			}
+			return $categorychild;
+		}
 	}
 ?>
