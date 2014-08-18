@@ -15,7 +15,11 @@
 					$category['category_id'] = $id->getAttribute('idata');
 					$category['name'] = $id->first_child()->plaintext;
 					$category['href'] = $id->first_child()->getAttribute('href');
-					$categories[] = $category;
+					$categories[] = array(
+						'category_id' => $id->getAttribute('idata'),
+						'name' => $id->first_child()->plaintext,
+						'href' => $id->first_child()->getAttribute('href')
+					);
 				}
 				
 			}
