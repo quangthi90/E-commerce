@@ -70,30 +70,22 @@ class ControllerModuleCategory extends Controller {
 		//print("<pre>"); var_dump($categories); exit;
 		foreach ($categories as $category) {
 			$children_data = array();
-			
+
 			$parent_id = 'menu_home_'.$category['category_id'];
 
 			$children = $this->extract_catalog_category->getCategoriesChild($parent_id);
 			foreach ($children as $child) {
-				/*$data = array(
-					'filter_category_id'  => $child['category_id'],
-					'filter_sub_category' => true
-				);*/
-
-				//$product_total = $this->model_catalog_product->getTotalProducts($data);
-
-				//$total += $product_total;
-
+				
 				$children_data[] = array(
 					'category_id' => $child['category_id'],
-					'name'        => $child['name'] . ($this->config->get('config_product_count')),
+					'name'        => $child['name'] ,
 					'href'        => $child['href']
 				);		
 			}
 
 			$this->data['categories'][] = array(
 				'category_id' => $category['category_id'],
-				'name'        => $category['name'] . ($this->config->get('config_product_count')),
+				'name'        => $category['name'],
 				'children'    => $children_data,
 				'href'        => $category['href'],
 			);	

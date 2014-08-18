@@ -15,8 +15,9 @@
 					$category['category_id'] = $id->getAttribute('idata');
 					$category['name'] = $id->first_child()->plaintext;
 					$category['href'] = $id->first_child()->getAttribute('href');
+					$categories[] = $category;
 				}
-				$categories[] = $category;
+				
 			}
 			return $categories;
 		}
@@ -30,9 +31,10 @@
 						$categorychild['category_id'] = $id->getAttribute('idata');
 						$categorychild['name'] = $id->first_child()->plaintext;
 						$categorychild['href'] = $id->first_child()->getAttribute('href');
+						$categorieschild[] = $categorychild;
 					}
 				}
-				$categorieschild[] = $categorychild;
+				
 			}
 			return $categorieschild;
 		}
