@@ -79,10 +79,10 @@ class ControllerModuleCategory extends Controller {
 			$children = $this->extract_catalog_category->getCategoriesChild($parent_id);
 
 			foreach ($children as $child) {
-				$data = array(
+				/*$data = array(
 					'filter_category_id'  => $child['category_id'],
 					'filter_sub_category' => true
-				);
+				);*/
 
 				//$product_total = $this->model_catalog_product->getTotalProducts($data);
 
