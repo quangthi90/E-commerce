@@ -7,7 +7,7 @@ class ControllerModuleFeatured extends Controller {
 		
 		$this->data['button_cart'] = $this->language->get('button_cart');
 		
-		$this->load->model('catalog/product'); 
+		$this->load->extract('module/featured'); 
 		
 		$this->load->model('tool/image');
 
