@@ -64,20 +64,16 @@ class ControllerModuleCategory extends Controller {
 		}*/
 		$this->load->extract('catalog/category');
 
-		//$this->load->model('catalog/product');
-
 		$this->data['categories'] = array();
 
 		$categories = $this->extract_catalog_category->getCategories();
-
+		//print("<pre>"); var_dump($categories); exit;
 		foreach ($categories as $category) {
-			//$total = $this->model_catalog_product->getTotalProducts(array('filter_category_id' => $category['category_id']));
-
 			$children_data = array();
+			
 			$parent_id = 'menu_home_'.$category['category_id'];
 
 			$children = $this->extract_catalog_category->getCategoriesChild($parent_id);
-
 			foreach ($children as $child) {
 				/*$data = array(
 					'filter_category_id'  => $child['category_id'],
