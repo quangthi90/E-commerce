@@ -69,9 +69,30 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
     <div class="header_bar">
       <div class="container_width">
         <div class="fl">
-          <?php foreach ($categories as $category) { ?>
-          <a onshow="initMenu('<?php echo $category['name']; ?>')" addclass="header_bar_simple_tip" hidearrow="1" class="simple_tip" href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a>
+            <?php foreach ($categories as $category) { ?>
+            <a addclass="header_bar_simple_tip" hidearrow="1" class="simple_tip" href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a>
+            <?php if ($category['children']) { ?>
+              <div class="ffl">
+                <?php for ($i = 0; $i < count($category['children']);) { ?>
+                <ul>
+                  <?php $j = $i + ceil(count($category['children']) / $category['column']); ?>
+                  <?php for (; $i < $j; $i++) { ?>
+                  <?php if (isset($category['children'][$i])) { ?>
+                  <li><a href="<?php echo $category['children'][$i]['href']; ?>"><?php echo $category['children'][$i]['name']; ?></a></li>
+                  <?php } ?>
+                  <?php } ?>
+                </ul>
+                <?php } ?>
+              </div>
+              <?php } ?>
            <?php } ?>
+           <script type="text/javascript">
+            $(document).ready(function(){
+              $(".header_bar a").hover(function(){
+                $(".header_bar .fl").find(".ffl").css("display", "block");
+              });
+            });
+           </script>
           <div class="plugin">
             <div style="text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 32px; height: 20px;" id="___plusone_0">
               <iframe width="100%" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 32px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" id="I0_1408159470805" name="I0_1408159470805" src="https://apis.google.com/u/0/se/0/_/+1/fastbutton?usegapi=1&amp;annotation=none&amp;size=medium&amp;origin=http%3A%2F%2Fvatgia.com&amp;url=http%3A%2F%2Fwww.vatgia.com%2F&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.en.RmV27G4cP4g.O%2Fm%3D__features__%2Fam%3DEQ%2Frt%3Dj%2Fd%3D1%2Ft%3Dzcms%2Frs%3DAItRSTNGQGK1RCUwKhcSa_cdAdZcwHiy5Q#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh&amp;id=I0_1408159470805&amp;parent=http%3A%2F%2Fvatgia.com&amp;pfname=&amp;rpctoken=95848700" data-gapiattached="true" title="+1"></iframe>
@@ -86,23 +107,6 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
           <?php } else { ?>
           <?php echo $text_logged; ?>
           <?php } ?>
-        <!-- <a oncleanup="simpleTipLoginOnCleanup()" onshow="simpleTipLoginOnShow()" addclass="header_bar_simple_tip" hidearrow="1" rel="#header_login" href="javascript:;" class="simple_tip icon user">Đăng nhập</a> -->
-        <div class="hidden" id="header_login">
-          <form  method="post" action="/home/act_login.php?redirect=L2hvbWUv" name="header_login" class="header_login"><!-- onsubmit="return checkForm(this.name, vatgiaConfig.login_config.array_check_form);" -->
-            <div><input type="text" placeholder="Tên đăng nhập" autocomplete="off" name="loginname" class="form_control"></div>
-            <div><input type="password" placeholder="Mật khẩu" name="password" class="form_control"></div>
-            <div><input type="checkbox" value="1" name="remember_password"><span onclick="$(this).prev().click()" class="text">Nhớ mật khẩu</span></div>
-            <div><input type="submit" value="Đăng nhập" class="form_button"></div>
-            <div><a rel="nofollow" href="/home/lost_password.php" class="text_link">Quên mật khẩu?</a></div>
-            <div class="login_other">
-              <div class="text">Hoặc đăng nhập bằng:</div>
-              <a rel="nofollow" href="https://id.vatgia.com/dang-nhap/facebook/?_cont=http%3A%2F%2Fvatgia.com%2Fhome%2Fidvg_return.php%3Fredirect%3DL2hvbWUv&amp;service=vatgia&amp;remember=1" class="facebook"></a>
-              <a rel="nofollow" href="https://id.vatgia.com/dang-nhap/google/?_cont=http%3A%2F%2Fvatgia.com%2Fhome%2Fidvg_return.php%3Fredirect%3DL2hvbWUv&amp;service=vatgia&amp;remember=1" class="google"></a>
-              <span class="clear"></span>
-            </div>
-            <input type="hidden" value="login" name="user_login">
-          </form>
-        </div>
       </div><div class="clear"></div>
     </div>
   </div>
@@ -122,8 +126,8 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
     <div class="search">
       <form  method="get" action="/home/quicksearch.php" name="header_search" id="header_search"><!--  onsubmit="return checkForm(this.name, arrCtrlSearch);" -->
         <div class="border">
-          <a rel="#header_search_option" href="javascript:;" class="simple_tip" id="header_search_text">Sản phẩm<b class="arrow_down"></b></a>
-          <a  class="language_vn"> <!-- onclick="changeLanguage($(this))" href="javascript:;"-->
+          <a rel="#header_search_option" href="#" class="simple_tip" id="header_search_text">Sản phẩm<b class="arrow_down"></b></a>
+          <a  class="language_vn">
           <?php echo $language ?></a>
           <input type="submit" value="Tìm kiếm" class="button">
           <div class="keyword">
@@ -134,17 +138,10 @@ $('body').prepend('<iframe src="<?php echo $store; ?>" style="display: none;"></
         <input type="hidden" disabled="disabled" value="search" name="view" id="search_shop">
         <input type="hidden" disabled="disabled" name="iCat" id="search_category">
       </form>
-      <div class="hidden" id="header_search_option">
-        <ul class="header_search_option">
-        <li class="list"><a onclick="changeSearchOption('module', 0, $(this))" rel="nofollow" href="javascript:;">Sản phẩm</a></li><li class="list"><a onclick="changeSearchOption('module', 1, $(this))" rel="nofollow" href="javascript:;">Rao vặt</a></li><li class="list"><a onclick="changeSearchOption('module', 2, $(this))" rel="nofollow" href="javascript:;">Hỏi đáp</a></li><li class="list"><a onclick="changeSearchOption('module', 3, $(this))" rel="nofollow" href="javascript:;">Cửa hàng</a></li></ul>
-      </div>
-     </div>
-      <div class="clear"></div>
     </div>
+    <div class="clear"></div>
+  </div>
   <!-- <?php echo $currency; ?> -->
   <?php //echo $cart; ?>
 
   <!-- <div class="links"><a href="<?php echo $home; ?>"><?php echo $text_home; ?></a><a href="<?php echo $wishlist; ?>" id="wishlist-total"><?php echo $text_wishlist; ?></a><a href="<?php echo $account; ?>"><?php echo $text_account; ?></a><a href="<?php echo $shopping_cart; ?>"><?php echo $text_shopping_cart; ?></a><a href="<?php echo $checkout; ?>"><?php echo $text_checkout; ?></a></div>  -->
-
-  
-</div>
