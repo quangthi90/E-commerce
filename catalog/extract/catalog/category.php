@@ -25,22 +25,30 @@
 			}
 			return $categories;
 		}
-		public function getCategoriesChild($parent_id = 0){
+		public function getCategoriesChild($parent_id){
 			$html = file_get_html('http://www.vatgia.com/home/');
-			$categorieschild = array();
-			foreach($html->find('ul#menu_child_1') as $element){
-				$categorychild = array();
-				foreach ($element->find('ul li') as $id) {
-					if ($id->parent()->getAttribute('idata') == $parent_id) {
-						$categorychild['category_id'] = $id->getAttribute('idata');
-						$categorychild['name'] = $id->first_child()->plaintext;
-						$categorychild['href'] = $id->first_child()->getAttribute('href');
-						$categorieschild[] = $categorychild;
+			$categoriesallchild = array();
+			foreach($html->find('div#menu_child_1') as $element){
+				$categorieschild = array();
+				foreach ($element->find('ul') as $id) {
+					$categorychild = array();
+					if ($id->getAttribute('id') == $parent_id) {
+						foreach ($id->find('li') as $child ) {
+							$categorychild['category_id'] = $child->getAttribute('idata');
+							$categorychild['name'] = $child->first_child()->plaintext;
+							$categorychild['href'] = $child->first_child()->getAttribute('href');
+							$categorieschild[] = array(
+								'category_id' => $child->getAttribute('idata'),
+								'name' => $child->first_child()->plaintext,
+								'href' => $child->first_child()->getAttribute('href')
+							);
+						}
+						
 					}
+					$categoriesallchild[] = $categorieschild;
 				}
-				
 			}
-			return $categorieschild;
+			return $categoriesallchild;
 		}
 	}
 ?>

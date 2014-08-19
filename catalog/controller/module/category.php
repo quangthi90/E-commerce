@@ -74,6 +74,7 @@ class ControllerModuleCategory extends Controller {
 			$parent_id = 'menu_home_'.$category['category_id'];
 
 			$children = $this->extract_catalog_category->getCategoriesChild($parent_id);
+			print("<pre>"); var_dump($children); exit;
 			foreach ($children as $child) {
 				
 				$children_data[] = array(
