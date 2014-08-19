@@ -69,12 +69,12 @@ class ControllerModuleCategory extends Controller {
 		$categories = $this->extract_catalog_category->getCategories();
 		//print("<pre>"); var_dump($categories); exit;
 		foreach ($categories as $category) {
-			$children_data = array();
+			//$children_data = array();
 
 			$parent_id = 'menu_home_'.$category['category_id'];
 
 			$children = $this->extract_catalog_category->getCategoriesChild($parent_id);
-			print("<pre>"); var_dump($children); exit;
+			//print("<pre>"); var_dump($children); 
 			foreach ($children as $child) {
 				
 				$children_data[] = array(
@@ -89,8 +89,9 @@ class ControllerModuleCategory extends Controller {
 				'name'        => $category['name'],
 				'children'    => $children_data,
 				'href'        => $category['href'],
-			);	
+			);
 		}
+		//exit;
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/category.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/module/category.tpl';
 		} else {

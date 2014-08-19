@@ -6,8 +6,6 @@
 	{
 		public function getCategories() {
 			$html = file_get_html('http://www.vatgia.com/home/');
-			//$html = new simple_html_dom();
-			//$html->load_file('http://www.vatgia.com/home/');
 			$categories = array();
 			foreach($html->find('ul#menu_root') as $element){
 				$category = array();
@@ -27,10 +25,11 @@
 		}
 		public function getCategoriesChild($parent_id){
 			$html = file_get_html('http://www.vatgia.com/home/');
-			$categoriesallchild = array();
+			// array contain content of li tag
+			$categorieschild = array();
 			foreach($html->find('div#menu_child_1') as $element){
-				$categorieschild = array();
 				foreach ($element->find('ul') as $id) {
+					//arrar contain content of a tag
 					$categorychild = array();
 					if ($id->getAttribute('id') == $parent_id) {
 						foreach ($id->find('li') as $child ) {
@@ -43,12 +42,14 @@
 								'href' => $child->first_child()->getAttribute('href')
 							);
 						}
-						
+						break;
 					}
-					$categoriesallchild[] = $categorieschild;
+					else{
+						continue;
+					}
 				}
 			}
-			return $categoriesallchild;
+			return $categorieschild;
 		}
 	}
 ?>
