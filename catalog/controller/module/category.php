@@ -67,31 +67,62 @@ class ControllerModuleCategory extends Controller {
 		$this->data['categories'] = array();
 
 		$categories = $this->extract_catalog_category->getCategories();
+
 		//print("<pre>"); var_dump($categories); exit;
+
 		foreach ($categories as $category) {
+			
 			//$children_data = array();
-
+			
+			$find_id = 'div#menu_child_1';
+			
 			$parent_id = 'menu_home_'.$category['category_id'];
-
-			$children = $this->extract_catalog_category->getCategoriesChild($parent_id);
+			
+			$children = $this->extract_catalog_category->getCategoriesChild($find_id,$parent_id);
+			
 			//print("<pre>"); var_dump($children); 
+			
 			foreach ($children as $child) {
 				
+				$find_id_2 = 'div#menu_child_2';
+
+				$parent_id_2 = 'menu_home_'.$child['category_id'];
+
+				$children_2 = $this->extract_catalog_category->getCategoriesChild($find_id_2,$parent_id_2);
+				
+				print("<pre>"); var_dump($children_2);exit;
+
+				/*foreach ($children_2 as $child_2) {
+			
+					//$parent_id_2 = 'menu_home_'.$child['category_id'];
+
+					//$find_id = 'div#menu_child_2';
+					
+					//$children_2 = $this->extract_catalog_category->getCategoriesChild($find_id,$parent_id_2);
+					
+					$children_2_data[] = array(
+						'category_id' => $child_2['category_id'],
+						'name'        => $child_2['name'] ,
+						//'children'    => $children_2_data,
+						'href'        => $child_2['href']
+					);		
+				}
 				$children_data[] = array(
 					'category_id' => $child['category_id'],
 					'name'        => $child['name'] ,
+					'children'    => $children_2_data,
 					'href'        => $child['href']
-				);		
-			}
+				);	*/	
+			} //exit;
 
-			$this->data['categories'][] = array(
+			/*$this->data['categories'][] = array(
 				'category_id' => $category['category_id'],
 				'name'        => $category['name'],
 				'children'    => $children_data,
 				'href'        => $category['href'],
-			);
+			);*/
 		}
-		//exit;
+		exit;
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/category.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/module/category.tpl';
 		} else {
