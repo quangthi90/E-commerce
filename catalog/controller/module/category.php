@@ -23,107 +23,37 @@ class ControllerModuleCategory extends Controller {
 			$this->data['child_id'] = 0;
 		}
 
-		/*$this->load->extract('catalog/category');
-
-		$this->load->model('catalog/product');
-
-		$this->data['categories'] = array();
-
-		$categories = $this->extract_catalog_category->getCategories(0);
-
-		foreach ($categories as $category) {
-			$total = $this->model_catalog_product->getTotalProducts(array('filter_category_id' => $category['category_id']));
-
-			$children_data = array();
-
-			$children = $this->extract_catalog_category->getCategories($category['category_id']);
-
-			foreach ($children as $child) {
-				$data = array(
-					'filter_category_id'  => $child['category_id'],
-					'filter_sub_category' => true
-				);
-
-				$product_total = $this->model_catalog_product->getTotalProducts($data);
-
-				$total += $product_total;
-
-				$children_data[] = array(
-					'category_id' => $child['category_id'],
-					'name'        => $child['name'] . ($this->config->get('config_product_count') ? ' (' . $product_total . ')' : ''),
-					'href'        => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'])	
-				);		
-			}
-
-			$this->data['categories'][] = array(
-				'category_id' => $category['category_id'],
-				'name'        => $category['name'] . ($this->config->get('config_product_count') ? ' (' . $total . ')' : ''),
-				'children'    => $children_data,
-				'href'        => $this->url->link('product/category', 'path=' . $category['category_id'])
-			);	
-		}*/
 		$this->load->extract('catalog/category');
 
 		$this->data['categories'] = array();
 
-		$categories = $this->extract_catalog_category->getCategories();
-
-		//print("<pre>"); var_dump($categories); exit;
-
-		print("<pre>"); var_dump($this->config->get('username')); exit;
-		$level_max = $this->config->get('level_max');
-
-		foreach ($categories as $category) {
-			
-			//$children_data = array();
-			for ( $i = 1; $i <= $level_max; $i++ ){
-				$find_id = 'div#menu_child_' . $i;
-				$parent_id = 'menu_home_'.$category['category_id'];
-				$children = $this->extract_catalog_category->getCategoriesChild($find_id,$parent_id);
-			}
-			print("<pre>"); var_dump($children); 
-			
-			foreach ($children as $child) {
-				
-				$find_id_2 = 'div#menu_child_2';
-
-				$parent_id_2 = 'menu_home_'.$child['category_id'];
-
-				$children_2 = $this->extract_catalog_category->getCategoriesChild($find_id_2,$parent_id_2);
-				
-				//print("<pre>"); var_dump($children_2);exit;
-
-				/*foreach ($children_2 as $child_2) {
-			
-					//$parent_id_2 = 'menu_home_'.$child['category_id'];
-
-					//$find_id = 'div#menu_child_2';
-					
-					//$children_2 = $this->extract_catalog_category->getCategoriesChild($find_id,$parent_id_2);
-					
-					$children_2_data[] = array(
-						'category_id' => $child_2['category_id'],
-						'name'        => $child_2['name'] ,
-						//'children'    => $children_2_data,
-						'href'        => $child_2['href']
-					);		
-				}
+		$aRootMenus = $this->extract_catalog_category->getCategories(
+			$this->config->get('menu')['root']['html'],
+			$this->config->get('menu')['root']['children']
+		);
+		
+		$this->data['categories'] = array();
+		foreach ( $aRootMenus as $aRootMenu ) {
+			$aLevel1Menus = $this->extract_catalog_category->getCategories(
+				$this->config->get('menu')['child']['html'] . $aRootMenu['category_id'],
+				$this->config->get('menu')['child']['children']
+			);
+			$children_data = array();
+			foreach ( $aLevel1Menus as $aLevel1Menu ) {
 				$children_data[] = array(
-					'category_id' => $child['category_id'],
-					'name'        => $child['name'] ,
-					'children'    => $children_2_data,
-					'href'        => $child['href']
-				);	*/	
-			} //exit;
-
-			/*$this->data['categories'][] = array(
-				'category_id' => $category['category_id'],
-				'name'        => $category['name'],
+					'category_id' => $aRootMenu['category_id'],
+					'name'        => $aRootMenu['name'] . ($this->config->get('config_product_count') ? ' (0)' : ''),
+					'href'        => $this->url->link('product/category', 'path=' . $aRootMenu['category_id'] . '_' . $aLevel1Menu['category_id'])	
+				);
+			}
+			$this->data['categories'][] = array(
+				'category_id' => $aRootMenu['category_id'],
+				'name'        => $aRootMenu['name'] . ($this->config->get('config_product_count') ? ' (0)' : ''),
 				'children'    => $children_data,
-				'href'        => $category['href'],
-			);*/
+				'href'        => $this->url->link('product/category', 'path=' . $aRootMenu['category_id'])
+			);
 		}
-		//exit;
+
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/category.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/module/category.tpl';
 		} else {

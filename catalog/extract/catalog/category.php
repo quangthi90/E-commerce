@@ -2,60 +2,32 @@
 	/**
 	* 
 	*/
-	class ExtractCatalogCategory 
+	class ExtractCatalogCategory extends Extract
 	{
-		public function getCategories() {
-			$html = file_get_html('http://www.vatgia.com/home/');
-			$categories = array();
-			foreach($html->find('ul#menu_root') as $element){
-				$category = array();
-				foreach ($element->find('li') as $id) {
-					$category['category_id'] = $id->getAttribute('idata');
-					$category['name'] = $id->first_child()->plaintext;
-					$category['href'] = $id->first_child()->getAttribute('href');
-					$categories[] = array(
-						'category_id' => $id->getAttribute('idata'),
-						'name' => $id->first_child()->plaintext,
-						'href' => $id->first_child()->getAttribute('href')
-					);
-				}
-				
-			}
-			return $categories;
+		private $sHtml = '';
+		private $config;
+
+		public function __construct($registry){
+			$this->config = $registry->get('config');
+			$this->sHtml = file_get_html( $this->config->get('menu')['origin_link'] );
 		}
-		public function getCategoriesChild($find_id,$parent_id){
-			$html = file_get_html('http://www.vatgia.com/home/');
-			// array contain content of li tag
-			$categorieschild = array();
-			foreach($html->find($find_id) as $element){
-				foreach ($element->find('ul') as $id) {
-					//arrar contain content of a tag
-					$categorychild = array();
-					if ($id->getAttribute('id') == $parent_id) {
-						foreach ($id->find('li') as $child ) {
-							if(isset($child->idata))
-							{
-								$categorychild['category_id'] = $child->getAttribute('idata');
-							}
-							else{
-								$categorychild['category_id']= null;
-							}
-							$categorychild['name'] = $child->first_child()->plaintext;
-							$categorychild['href'] = $child->first_child()->getAttribute('href');
-							$categorieschild[] = array(
-								'category_id' => $child->getAttribute('idata'),
-								'name' => $child->first_child()->plaintext,
-								'href' => $child->first_child()->getAttribute('href')
-							);
-						}
-						break;
-					}
-					else{
-						continue;
-					}
+
+		public function getCategories( $html, $children ) {
+			$aMenuParents = $this->sHtml->find( $html );
+
+			$aCategories = array();
+			foreach ( $aMenuParents as $oMenuParent ) {
+				$aMenuChildren = $oMenuParent->find( $children );
+				foreach( $aMenuChildren as $oMenu ){
+					$aCategories[] = array(
+						'category_id' => $oMenu->getAttribute('idata') ? $oMenu->getAttribute('idata') : "",
+						'name' => $oMenu->first_child()->plaintext,
+						'href' => $oMenu->first_child()->getAttribute('href')
+					);
+					
 				}
 			}
-			return $categorieschild;
+			return $aCategories;
 		}
 	}
 ?>
