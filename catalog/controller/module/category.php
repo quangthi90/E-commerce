@@ -70,17 +70,18 @@ class ControllerModuleCategory extends Controller {
 
 		//print("<pre>"); var_dump($categories); exit;
 
+		print("<pre>"); var_dump($this->config->get('username')); exit;
+		$level_max = $this->config->get('level_max');
+
 		foreach ($categories as $category) {
 			
 			//$children_data = array();
-			
-			$find_id = 'div#menu_child_1';
-			
-			$parent_id = 'menu_home_'.$category['category_id'];
-			
-			$children = $this->extract_catalog_category->getCategoriesChild($find_id,$parent_id);
-			
-			//print("<pre>"); var_dump($children); 
+			for ( $i = 1; $i <= $level_max; $i++ ){
+				$find_id = 'div#menu_child_' . $i;
+				$parent_id = 'menu_home_'.$category['category_id'];
+				$children = $this->extract_catalog_category->getCategoriesChild($find_id,$parent_id);
+			}
+			print("<pre>"); var_dump($children); 
 			
 			foreach ($children as $child) {
 				
@@ -90,7 +91,7 @@ class ControllerModuleCategory extends Controller {
 
 				$children_2 = $this->extract_catalog_category->getCategoriesChild($find_id_2,$parent_id_2);
 				
-				print("<pre>"); var_dump($children_2);exit;
+				//print("<pre>"); var_dump($children_2);exit;
 
 				/*foreach ($children_2 as $child_2) {
 			
@@ -122,7 +123,7 @@ class ControllerModuleCategory extends Controller {
 				'href'        => $category['href'],
 			);*/
 		}
-		exit;
+		//exit;
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/module/category.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/module/category.tpl';
 		} else {
