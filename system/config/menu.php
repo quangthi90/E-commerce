@@ -1,5 +1,5 @@
 <?php
-$_['level_max']						= '3';
+$_['menu']['level_max']						= '2';
 $_['menu']['origin_link']			= 'http://www.vatgia.com/home/';
 $_['menu']['root']['html']			= '#menu_root';
 $_['menu']['root']['children']		= 'li';

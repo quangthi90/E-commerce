@@ -34,22 +34,10 @@ class ControllerModuleCategory extends Controller {
 		
 		$this->data['categories'] = array();
 		foreach ( $aRootMenus as $aRootMenu ) {
-			$aLevel1Menus = $this->extract_catalog_category->getCategories(
-				$this->config->get('menu')['child']['html'] . $aRootMenu['category_id'],
-				$this->config->get('menu')['child']['children']
-			);
-			$children_data = array();
-			foreach ( $aLevel1Menus as $aLevel1Menu ) {
-				$children_data[] = array(
-					'category_id' => $aRootMenu['category_id'],
-					'name'        => $aRootMenu['name'] . ($this->config->get('config_product_count') ? ' (0)' : ''),
-					'href'        => $this->url->link('product/category', 'path=' . $aRootMenu['category_id'] . '_' . $aLevel1Menu['category_id'])	
-				);
-			}
 			$this->data['categories'][] = array(
 				'category_id' => $aRootMenu['category_id'],
 				'name'        => $aRootMenu['name'] . ($this->config->get('config_product_count') ? ' (0)' : ''),
-				'children'    => $children_data,
+				'children'    => $this->getChildrenCategories( $aRootMenu, $this->config->get('menu')['level_max'] ),
 				'href'        => $this->url->link('product/category', 'path=' . $aRootMenu['category_id'])
 			);
 		}
@@ -61,6 +49,26 @@ class ControllerModuleCategory extends Controller {
 		}
 
 		$this->render();
+	}
+
+	private function getChildrenCategories( $aMenu = array(), $iLevelChildMax = 0 ) {
+		if ( $iLevelChildMax == 0 ) return array();
+		$iLevelChildMax--;
+		$aMenus = array();
+		$aChildrenMenus = $this->extract_catalog_category->getCategories(
+			$this->config->get('menu')['child']['html'] . $aMenu['category_id'],
+			$this->config->get('menu')['child']['children']
+		);
+		if ( count($aChildrenMenus) == 0 ) return array();
+		foreach ( $aChildrenMenus as $aChildrenMenu ) {
+			$aMenus[] = array(
+				'category_id' => $aChildrenMenu['category_id'],
+				'name'        => $aChildrenMenu['name'] . ($this->config->get('config_product_count') ? ' (0)' : ''),
+				'href'        => $this->url->link('product/category', 'path=' . $aMenu['category_id'] . '_' . $aChildrenMenu['category_id']),
+				'children' 	  => $this->getChildrenCategories( $aChildrenMenu,  $iLevelChildMax )
+			);
+		}
+		return $aMenus;
 	}
 }
 ?>
